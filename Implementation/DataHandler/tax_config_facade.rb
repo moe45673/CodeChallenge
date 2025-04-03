@@ -1,30 +1,26 @@
-require 'json'
-
 class TaxConfigFacade
   include Facade
-  def initialize(config_path)
+  
+  def initialize(config_path, data_handler)
     @config_path = config_path
-    @config = JSON.parse(File.read(config_path))
+    @config = data_handler.read(config_path)
   end
 
   # Get taxes that apply to the item
   def get(item)
     taxes = @config["taxes"].select { |tax| applies?(tax["condition"], item) } 
     rates = config["rates"]
+    tax_header = {"taxes" => []  }
     taxes.map do |tax|
-      {
+      tax_entry = {
         "type" => tax["type"],
         "rate" => rates[tax["type"]] || 0.0,
         "condition" => tax["condition"]
       }
-  end
-
-  # Get modifications that apply to the item for a specific tax type
-  def get(item, tax_type)
-    @config["modifications"].select do |mod|
-      mod["affected_tax"] == tax_type && applies?(mod["condition"], item)
+      tax_header["taxes"] << tax_entry
     end
   end
+
 
   protected
 
@@ -32,15 +28,11 @@ class TaxConfigFacade
   def applies?(condition, item)
     key = condition["key"]
     return true if key == "always"
-    expected_value = condition["value"]
-    actual_value = item[key]
-    normalized_expected = normalize(expected_value)
-    normalized_actual = normalize(actual_value)
-    if actual_value.is_a?(Array)
-      (normalized_actual & normalized_expected).any?
-    else
-      Array(normalized_expected).include?(normalized_actual)
-    end
+          
+    expected_value = Array(condition["value"])  # e.g. [true], ["book"]
+    actual_value = Array(item[key])
+    # check if there's any intersection, if true then it applies
+    (normalize(actual_value) & normalize(expected_value)).any?     
   end
 
   # Normalize values for consistent comparison

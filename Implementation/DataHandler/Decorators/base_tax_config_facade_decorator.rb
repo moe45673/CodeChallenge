@@ -1,14 +1,13 @@
-class AbstractTaxFacadeDecorator < TaxConfigFacade 
- 
- def initialize(tcf)
-   @baseclass = tcf
-   super(tcf.config_path)
- end
+class AbstractTaxCalculatorDecorator < TaxCalculator
+  
+  def initialize(taxCalc)
+    @baseclass = taxCalc
+    @data_source = @baseclass.data_source
+  end
 
- def get(item)
-   raise NotImplementedError, "Subclasses must implement get(item)"
- end
+  def calculate_tax(item,tax,rate)    
+    raise NotImplementedError, "Subclasses must implement calculate_tax(item)"
+  end
 
- 
 
 end
