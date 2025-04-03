@@ -1,0 +1,33 @@
+{
+  "rates": {
+    "base": 0.10,
+    "import": 0.05
+  },
+  "taxes": [
+    {
+      "type": "base",
+      "condition": {
+        "key": "always",
+        "value": [true]
+      }
+    },
+    {
+      "type": "import",
+      "condition": {
+        "key": "imported",
+        "value": [true]
+      }
+    }
+  ],
+  "modifications": [
+    {
+      "type": "exemption",
+      "affected_tax": "base",
+      "condition": {
+        "key": "tags",
+        "value": ["book", "food", "medicine"]
+      },
+      "value": 0.0
+    }
+  ]
+}

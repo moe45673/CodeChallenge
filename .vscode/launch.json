@@ -1,0 +1,12 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "type": "ruby_lsp",
+        "request": "launch",
+        "name": "Debug program",
+        "program": "${workspaceFolder}/main.rb",
+        "cwd": "${workspaceFolder}"
+      }
+    ]
+  }
