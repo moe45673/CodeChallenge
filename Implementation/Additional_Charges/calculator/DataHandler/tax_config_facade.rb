@@ -1,5 +1,6 @@
 class TaxConfigFacade
   include Facade
+  attr_reader :config
   
   def initialize(config_path, data_handler)
     @config_path = config_path
@@ -19,6 +20,7 @@ class TaxConfigFacade
       }
       tax_header["taxes"] << tax_entry
     end
+    return tax_header
   end
 
 
@@ -30,7 +32,7 @@ class TaxConfigFacade
     return true if key == "always"
           
     expected_value = Array(condition["value"])  # e.g. [true], ["book"]
-    actual_value = Array(item[key])
+    actual_value = Array(item[key.to_s])
     # check if there's any intersection, if true then it applies
     (normalize(actual_value) & normalize(expected_value)).any?     
   end

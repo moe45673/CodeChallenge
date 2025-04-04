@@ -1,0 +1,51 @@
+[
+    {
+      "id": 1001,
+      "name": "book",
+      "plural": "books",
+      "tags": ["book", "literature", "reading"],
+      "imported": false
+    },
+    {
+      "id": 1002,
+      "name": "music CD",
+      "plural": "music CDs",
+      "tags": ["music", "entertainment"],
+      "imported": false
+    },
+    {
+      "id": 1003,
+      "name": "chocolate bar",
+      "plural": "chocolate bars",
+      "tags": ["food", "chocolate", "snack"],
+      "imported": false
+    },
+    {
+      "id": 1004,
+      "name": "box of chocolates",
+      "plural": "boxes of chocolates",
+      "tags": ["food", "chocolate", "luxury"],
+      "imported": true
+    },
+    {
+      "id": 1005,
+      "name": "bottle of perfume",
+      "plural": "bottles of perfume",
+      "tags": ["luxury", "perfume", "cosmetics"],
+      "imported": true
+    },
+    {
+      "id": 1006,
+      "name": "bottle of perfume",
+      "plural": "bottles of perfume",
+      "tags": ["luxury", "perfume", "cosmetics"],
+      "imported": false
+    },
+    {
+      "id": 1007,
+      "name": "packet of headache pills",
+      "plural": "packets of headache pills",
+      "tags": ["medical", "health", "medicine"],
+      "imported": false
+    }
+  ]

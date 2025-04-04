@@ -1,11 +1,16 @@
 class ModificationCalculator < AbstractTaxCalculatorDecorator
 
 
-  def calculate_tax(item,tax,rate)    
-    modified_rate = super
-    tax_type = tax["type"]    
-    modified_rate *= calculate_modification(item, tax_type, rate) || rate
+  def calculate_tax(tax, data_source)    
+    modified_rate = @baseclass.calculate_tax(tax, data_source)
+    mods = data_source["modifications"]
     
+    
+    mods.each do |mod|
+      modified_rate *= calculate_modification(mod) if mod["affected_tax"] == tax["type"]
+    end if mods
+    
+    return modified_rate
   end
 
   def calculate_modification(mod)

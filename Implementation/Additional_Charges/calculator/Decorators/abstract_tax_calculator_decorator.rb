@@ -5,7 +5,7 @@ class AbstractTaxCalculatorDecorator < TaxCalculator
    @data_source = taxCalc.data_source
  end
 
- def calculate_tax(item)   
-  raise NotImplementedError, "Subclasses must implement calculate_tax(item)"
+ def calculate_tax(tax, data_source)   
+  raise NotImplementedError, "Subclasses must implement calculate_tax(tax, data_source)"
  end
 end
